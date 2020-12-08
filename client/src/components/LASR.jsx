@@ -45,7 +45,7 @@ class LASR extends Component {
 		  var val = curr_qs[key2];
 		  if(val === -1){
 			  if(test === "Never"){
-				  temp += 4;
+				  temp += 4; 
 			  }
 			  else if(test === "Rarely"){
 				  temp += 3; 
