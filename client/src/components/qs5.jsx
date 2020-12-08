@@ -1,7 +1,9 @@
 var qs5_dict = 
 {
-    "I had a friend every year in school": 1,
-    "I laughed out loud with my family members": 1,
+    "I had a friend every year in school": 1
+}
+export default qs5_dict;
+/*    "I laughed out loud with my family members": 1,
     "I played by myself": 1, 
     "Someone made sure I was cared for even when I didn't ask them for help": 1,
     "I spend time with people who I like looking into their eyes": 1,
@@ -12,6 +14,4 @@ var qs5_dict =
     "People talk about me in positive ways": 1,
     "I had more than one adult who made sure I was safe and happy": 1,
     "I felt alone/without friends": 1,
-    "People were glad I was around": 1
-}
-export default qs5_dict;
+    "People were glad I was around": 1*/

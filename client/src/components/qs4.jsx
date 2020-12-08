@@ -1,7 +1,9 @@
 var qs4_dict = 
 {
-    "Someone is immediately available to me that will protect me if I feel I need it?": 1,
-    "I trust that my personal belongings will be where I left the when I return?": 1,
+    "Someone is immediately available to me that will protect me if I feel I need it?": 1
+}
+export default qs4_dict;
+/*    "I trust that my personal belongings will be where I left the when I return?": 1,
     "I feel sick, tight; jaw, neck, chest, or back": 1,
     "I feel like I need to defend myself": 1,
     "I feel Safe": 1,
@@ -34,6 +36,4 @@ var qs4_dict =
     "When I leave my home, I trust that when I return my personal possessions will be there": 1,
     "When you leave my home I trust that my possessions will be in relatively the same location as when I left": 1,
     "During a year I move to a new residence": 1,
-    "I am afraid or anxious to leave my residence because I don’t trust I can return to my residence or belongings": 1
-}
-export default qs4_dict;
+    "I am afraid or anxious to leave my residence because I don’t trust I can return to my residence or belongings": 1*/

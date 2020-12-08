@@ -21,9 +21,9 @@ class LASR extends Component {
   constructor(props){
     super(props)
     this.state = {
-	  score: [0,0,0,0,0,0,0,0,0,0,0],
+	  section_scores: [0,0,0,0,0,0,0,0,0,0,0],
 	  qs: [qs1_dict, qs2_dict, qs3_dict, qs4_dict, qs5_dict, qs6_dict, qs7_dict, qs8_dict, qs9_dict, qs10_dict],
-	  selectState: 'Combined'
+	  chartSelectorState: 'Combined'
     }
     this.onCompleteComponent = this.onCompleteComponent.bind(this)
   }
@@ -79,7 +79,7 @@ class LASR extends Component {
 		sum += scores[v];
 	}
 	scores.push(sum);
-	this.setState({score: scores});
+	this.setState({section_scores: scores});
 	var t = this.props;
     Axios.post(`http://localhost:3001/api/insert`, {section1_score: scores[0], section2_score: scores[1], total_score: scores[2], idString: t})
     .then(() => {
@@ -124,10 +124,12 @@ class LASR extends Component {
   			name: "Total score",
   			toolTipContent: "<b>{label}</b> <br> <span style= color: #4F81BC>{name}</span>: {y}",
   			dataPoints:[
-  				{y:this.state.score[0], label: "Section 1", color: "#f3a4a8"},
-				{y:this.state.score[1], label: "Section 2"},
-				{y:this.state.score[2], label: "Total"}
-				  
+  				{y:(this.state.section_scores[0] + this.state.section_scores[1]), label: "Section 1", color: "#f3a4a8"},
+				{y:(this.state.section_scores[2] + this.state.section_scores[3]), label: "Section 2"},
+				{y:(this.state.section_scores[4] + this.state.section_scores[5]), label: "Section 3"},
+				{y:(this.state.section_scores[6] + this.state.section_scores[7]), label: "Section 4"},
+				{y:(this.state.section_scores[8] + this.state.section_scores[9]), label: "Section 5"},
+				{y:this.state.section_scores[10], label: "Total"}
   			]
   		},
   		{
@@ -137,7 +139,10 @@ class LASR extends Component {
   			dataPoints:[
   				{y:[(7),(11)], label: "Section 1"},
 				{y:[(13),(15)], label: "Section 2"},
-				{y:[(20),(26)], label: "Total"}  
+				{y:[(20),(26)], label: "Section 3"},
+				{y:[(7),(11)], label: "Section 4"},
+				{y:[(13),(15)], label: "Section 5"},
+				{y:[(20),(26)], label: "Total"}   
   			]
   		}]
   	};
@@ -148,6 +153,38 @@ class LASR extends Component {
 	var qarr2 = [];
 	for(const key in qs2_dict){
 		qarr2.push(key);
+	}
+	var qarr3 = [];
+	for(const key in qs3_dict){
+		qarr3.push(key);
+	}
+	var qarr4 = [];
+	for(const key in qs4_dict){
+		qarr4.push(key);
+	}
+	var qarr5 = [];
+	for(const key in qs5_dict){
+		qarr5.push(key);
+	}
+	var qarr6 = [];
+	for(const key in qs6_dict){
+		qarr6.push(key);
+	}
+	var qarr7 = [];
+	for(const key in qs7_dict){
+		qarr7.push(key);
+	}
+	var qarr8 = [];
+	for(const key in qs8_dict){
+		qarr8.push(key);
+	}
+	var qarr9 = [];
+	for(const key in qs9_dict){
+		qarr9.push(key);
+	}
+	var qarr10 = [];
+	for(const key in qs10_dict){
+		qarr10.push(key);
 	}
 	var json = {
 	    title: "LASR",
@@ -183,7 +220,6 @@ class LASR extends Component {
 	                  type: "matrixdropdown",
 	                  name: "2",
 	                  title: " ",
-	                  requiredErrorText: "b",
 	                  columns: [
 	                      {
 	                          name: "col1",
@@ -196,6 +232,182 @@ class LASR extends Component {
 	                  ],
 
 	                  rows: qarr2
+	                }
+	            ]
+			},
+			{
+	            title: "",
+	            questions: [
+	                {
+	                  type: "matrixdropdown",
+	                  name: "3",
+	                  title: " ",
+	                  columns: [
+	                      {
+	                          name: "col1",
+	                          cellType: "radiogroup",
+	                          showInMultipleColumns: true,
+	                          isRequired: true,
+	                          requiredErrorText: "Please complete",
+	                          choices: ["Never", "Rarely", "Sometimes", "Often", "Always"]
+	                      }
+	                  ],
+
+	                  rows: qarr3
+	                }
+	            ]
+			},
+			{
+	            title: "",
+	            questions: [
+	                {
+	                  type: "matrixdropdown",
+	                  name: "4",
+	                  title: " ",
+	                  columns: [
+	                      {
+	                          name: "col1",
+	                          cellType: "radiogroup",
+	                          showInMultipleColumns: true,
+	                          isRequired: true,
+	                          requiredErrorText: "Please complete",
+	                          choices: ["Never", "Rarely", "Sometimes", "Often", "Always"]
+	                      }
+	                  ],
+
+	                  rows: qarr4
+	                }
+	            ]
+			},
+			{
+	            title: "",
+	            questions: [
+	                {
+	                  type: "matrixdropdown",
+	                  name: "5",
+	                  title: " ",
+	                  columns: [
+	                      {
+	                          name: "col1",
+	                          cellType: "radiogroup",
+	                          showInMultipleColumns: true,
+	                          isRequired: true,
+	                          requiredErrorText: "Please complete",
+	                          choices: ["Never", "Rarely", "Sometimes", "Often", "Always"]
+	                      }
+	                  ],
+
+	                  rows: qarr5
+	                }
+	            ]
+			},
+			{
+	            title: "",
+	            questions: [
+	                {
+	                  type: "matrixdropdown",
+	                  name: "6",
+	                  title: " ",
+	                  columns: [
+	                      {
+	                          name: "col1",
+	                          cellType: "radiogroup",
+	                          showInMultipleColumns: true,
+	                          isRequired: true,
+	                          requiredErrorText: "Please complete",
+	                          choices: ["Never", "Rarely", "Sometimes", "Often", "Always"]
+	                      }
+	                  ],
+
+	                  rows: qarr6
+	                }
+	            ]
+			},
+			{
+	            title: "",
+	            questions: [
+	                {
+	                  type: "matrixdropdown",
+	                  name: "7",
+	                  title: " ",
+	                  columns: [
+	                      {
+	                          name: "col1",
+	                          cellType: "radiogroup",
+	                          showInMultipleColumns: true,
+	                          isRequired: true,
+	                          requiredErrorText: "Please complete",
+	                          choices: ["Never", "Rarely", "Sometimes", "Often", "Always"]
+	                      }
+	                  ],
+
+	                  rows: qarr7
+	                }
+	            ]
+			},
+			{
+	            title: "",
+	            questions: [
+	                {
+	                  type: "matrixdropdown",
+	                  name: "8",
+	                  title: " ",
+	                  columns: [
+	                      {
+	                          name: "col1",
+	                          cellType: "radiogroup",
+	                          showInMultipleColumns: true,
+	                          isRequired: true,
+	                          requiredErrorText: "Please complete",
+	                          choices: ["Never", "Rarely", "Sometimes", "Often", "Always"]
+	                      }
+	                  ],
+
+	                  rows: qarr8
+	                }
+	            ]
+			},
+			{
+	            title: "",
+	            questions: [
+	                {
+	                  type: "matrixdropdown",
+	                  name: "9",
+	                  title: " ",
+	                  columns: [
+	                      {
+	                          name: "col1",
+	                          cellType: "radiogroup",
+	                          showInMultipleColumns: true,
+	                          isRequired: true,
+	                          requiredErrorText: "Please complete",
+	                          choices: ["Never", "Rarely", "Sometimes", "Often", "Always"]
+	                      }
+	                  ],
+
+	                  rows: qarr9
+	                }
+	            ]
+			},
+			{
+	            title: "",
+	            questions: [
+	                {
+	                  type: "matrixdropdown",
+	                  name: "10",
+	                  title: " ",
+	                  columns: [
+	                      {
+	                          name: "col1",
+	                          cellType: "radiogroup",
+	                          showInMultipleColumns: true,
+	                          isRequired: true,
+	                          requiredErrorText: "Please complete",
+	                          choices: ["Never", "Rarely", "Sometimes", "Often", "Always"]
+	                      }
+	                  ],
+
+	                  rows: qarr10
 	                }
 	            ]
 	        }
@@ -211,7 +423,7 @@ class LASR extends Component {
         ) : null
       var displayResults = this.state.isCompleted ? (
 	      	<div>
-	          <div> Your total score is: {this.state.score[2]} </div>
+	          <div> Your total score is: {this.state.section_scores[10]} </div>
 			  <div>
 				  <SwitchSelector
 						onChange={onChange}
@@ -221,7 +433,7 @@ class LASR extends Component {
 						fontColor={"#000000"}
 					/>
 			  </div>
-	  <div>{this.state.selectState === "Combined" && <CanvasJSChart options = {options}/>}</div>
+	  <div>{this.state.chartSelectorState === "Combined" && <CanvasJSChart options = {options}/>}</div>
 	        </div>
         ) : null;
       var onSurveyCompletion = this.state.isCompleted ? (
