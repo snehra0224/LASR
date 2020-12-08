@@ -48,7 +48,7 @@ class LASR extends Component {
 				  temp += 4;
 			  }
 			  else if(test === "Rarely"){
-				  temp += 3;
+				  temp += 3; 
 			  }
 			  else if(test === "Sometimes"){
 				  temp += 2;
