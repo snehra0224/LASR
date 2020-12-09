@@ -105,13 +105,12 @@ class LASR extends Component {
 		}
 	 ];
 	 const onChange = (newValue) => {
-		console.log(newValue);
-		this.setState({selectState: newValue});
-
+		this.setState({chartSelectorState: newValue});
+		console.log(this.state.chartSelectorState);
 	};
 	 
 	const initialSelectedIndex = selectorOptions.findIndex(({value}) => value === "Combined");
-  	var options = {
+  	var chart1Options = {
   		animationEnabled: true,
   		theme: "light2",
   		title: {text: "Your Results"},
@@ -145,7 +144,77 @@ class LASR extends Component {
 				{y:[(20),(26)], label: "Total"}   
   			]
   		}]
-  	};
+	  };
+	var chart2Options = {
+		animationEnabled: true,
+		theme: "light2",
+		title: {text: "Your Results"},
+		axisX: {title: "Category",reversed:true},
+		axisY: {title: "Score",includeZero:true,labelFormatter:this.addSymbols, interval:5},
+		toolTip: {shared: true},
+		data:[
+		{
+			type:"bar",
+			name: "Historical score",
+			toolTipContent: "<b>{label}</b> <br> <span style= color: #4F81BC>{name}</span>: {y}",
+			dataPoints:[
+				{y:this.state.section_scores[0], label: "Section 1", color: "#f3a4a8"},
+			  {y:this.state.section_scores[2], label: "Section 2"},
+			  {y:this.state.section_scores[4], label: "Section 3"},
+			  {y:this.state.section_scores[6], label: "Section 4"},
+			  {y:this.state.section_scores[8], label: "Section 5"},
+			  {y:this.state.section_scores[10], label: "Total"}
+			]
+		},
+		{
+			type: "error",
+			name: "Ideal range",
+			toolTipContent: "<span style=color:#C0504E>{name}</span>: {y[0]} - {y[1]}",
+			dataPoints:[
+			  {y:[(7),(11)], label: "Section 1"},
+			  {y:[(13),(15)], label: "Section 2"},
+			  {y:[(20),(26)], label: "Section 3"},
+			  {y:[(7),(11)], label: "Section 4"},
+			  {y:[(13),(15)], label: "Section 5"},
+			  {y:[(20),(26)], label: "Total"}   
+			]
+		}]
+	};
+	var chart3Options = {
+		animationEnabled: true,
+		theme: "light2",
+		title: {text: "Your Results"},
+		axisX: {title: "Category",reversed:true},
+		axisY: {title: "Score",includeZero:true,labelFormatter:this.addSymbols, interval:5},
+		toolTip: {shared: true},
+		data:[
+		{
+			type:"bar",
+			name: "Total score",
+			toolTipContent: "<b>{label}</b> <br> <span style= color: #4F81BC>{name}</span>: {y}",
+			dataPoints:[
+				{y: this.state.section_scores[1], label: "Section 1", color: "#f3a4a8"},
+			  {y: this.state.section_scores[3], label: "Section 2"},
+			  {y: this.state.section_scores[5], label: "Section 3"},
+			  {y: this.state.section_scores[7], label: "Section 4"},
+			  {y: this.state.section_scores[9], label: "Section 5"},
+			  {y: this.state.section_scores[10], label: "Total"}
+			]
+		},
+		{
+			type: "error",
+			name: "Ideal range",
+			toolTipContent: "<span style=color:#C0504E>{name}</span>: {y[0]} - {y[1]}",
+			dataPoints:[
+				{y:[(7),(11)], label: "Section 1"},
+			  {y:[(13),(15)], label: "Section 2"},
+			  {y:[(20),(26)], label: "Section 3"},
+			  {y:[(7),(11)], label: "Section 4"},
+			  {y:[(13),(15)], label: "Section 5"},
+			  {y:[(20),(26)], label: "Total"}   
+			]
+		}]
+	};
 	var qarr1 = [];
 	for(const key in qs1_dict){
 		qarr1.push(key);
@@ -423,7 +492,6 @@ class LASR extends Component {
         ) : null
       var displayResults = this.state.isCompleted ? (
 	      	<div>
-	          <div> Your total score is: {this.state.section_scores[10]} </div>
 			  <div>
 				  <SwitchSelector
 						onChange={onChange}
@@ -433,13 +501,23 @@ class LASR extends Component {
 						fontColor={"#000000"}
 					/>
 			  </div>
-	  <div>{this.state.chartSelectorState === "Combined" && <CanvasJSChart options = {options}/>}</div>
+	  		  <div>
+				  {this.state.chartSelectorState === "Combined" && 
+				  <CanvasJSChart options = {chart1Options}/>}
+			  </div>
+			  <div>
+			      {this.state.chartSelectorState === "Historical" && 
+				  <CanvasJSChart options = {chart2Options}/>}
+			  </div>
+			  <div>
+			      {this.state.chartSelectorState === "Contemporary" && 
+				  <CanvasJSChart options = {chart3Options}/>}
+			  </div>
 	        </div>
         ) : null;
       var onSurveyCompletion = this.state.isCompleted ? (
-          <div> Thank you for taking the LASR </div>
+          <div> <h1>Thank you for taking the LASR</h1> </div>
         ) : null;
-
     return (
       <div className="section1">
         <div>
