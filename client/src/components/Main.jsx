@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import StartPage from './StartPage';
-import LASR from './LASR';
+import Scored from './Scored';
+import Unscored from './Unscored';
 
 class Main extends Component {
 	state = {
         step: 1,
-        idString: ''
+        idString: '',
+        section_scores: []
     }
 
     nextStep = () => {
@@ -25,11 +27,16 @@ class Main extends Component {
                         setID = {(idString) => this.setState({idString})}
                         />
             case 2:
-                return <LASR
+                return <Scored
+                        nextStep = {this.nextStep}
                         idString = {this.state.idString}
+                        setScores = {(section_scores) => this.setState({section_scores})}
+                        />
+            case 3:
+                return <Unscored
+                        nextStep = {this.nextStep}
                         />
         }
     }
 }
-
 export default Main;

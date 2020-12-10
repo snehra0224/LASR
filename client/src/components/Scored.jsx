@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import * as Survey from "survey-react";
-import SwitchSelector from "react-switch-selector";
-import CanvasJSReact from './canvasjs.react';
+import {Button} from 'semantic-ui-react';
+// import SwitchSelector from "react-switch-selector";
+// import CanvasJSReact from './canvasjs.react';
 import Axios from 'axios';
-import './LASR.css';
+import './Scored.css';
 import qs1_dict from './qs1';
 import qs2_dict from './qs2';
 import qs3_dict from './qs3';
@@ -14,19 +15,25 @@ import qs7_dict from './qs7';
 import qs8_dict from './qs8';
 import qs9_dict from './qs9';
 import qs10_dict from './qs10';
-var CanvasJS = CanvasJSReact.CanvasJS;
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+// var CanvasJS = CanvasJSReact.CanvasJS;
+// var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-class LASR extends Component {
+class Scored extends Component {
   constructor(props){
     super(props)
     this.state = {
-	  section_scores: [0,0,0,0,0,0,0,0,0,0,0],
+	//   section_scores: [0,0,0,0,0,0,0,0,0,0,0],
 	  qs: [qs1_dict, qs2_dict, qs3_dict, qs4_dict, qs5_dict, qs6_dict, qs7_dict, qs8_dict, qs9_dict, qs10_dict],
 	  chartSelectorState: 'Combined'
     }
     this.onCompleteComponent = this.onCompleteComponent.bind(this)
   }
+
+  continue = (e) => {
+	e.preventDefault();
+	this.props.nextStep();
+  }
+
   onCompleteComponent = (survey) => {
     this.setState({
       isCompleted: true
@@ -79,7 +86,8 @@ class LASR extends Component {
 		sum += scores[v];
 	}
 	scores.push(sum);
-	this.setState({section_scores: scores});
+	// this.setState({section_scores: scores});
+	this.props.setScores(scores);
 	var t = this.props;
     Axios.post(`http://localhost:3001/api/insert`, {section1_score: scores[0], section2_score: scores[1], total_score: scores[2], idString: t})
     .then(() => {
@@ -87,134 +95,134 @@ class LASR extends Component {
     });
 }
   render(){
-	const selectorOptions = [
-		{
-			label: "Combined Score",
-			value: "Combined",
-			selectedBackgroundColor: "#0097e6",
-		},
-		{
-			label: "Historical Score",
-			value: "Historical",
-			selectedBackgroundColor: "#fbc531"
-		},
-		{
-			label: "Contemporary Score",
-			value: "Contemporary",
-			selectedBackgroundColor: "#FF0000"
-		}
-	 ];
-	 const onChange = (newValue) => {
-		this.setState({chartSelectorState: newValue});
-		console.log(this.state.chartSelectorState);
-	};
+	// const selectorOptions = [
+	// 	{
+	// 		label: "Combined Score",
+	// 		value: "Combined",
+	// 		selectedBackgroundColor: "#0097e6",
+	// 	},
+	// 	{
+	// 		label: "Historical Score",
+	// 		value: "Historical",
+	// 		selectedBackgroundColor: "#fbc531"
+	// 	},
+	// 	{
+	// 		label: "Contemporary Score",
+	// 		value: "Contemporary",
+	// 		selectedBackgroundColor: "#FF0000"
+	// 	}
+	//  ];
+	//  const onChange = (newValue) => {
+	// 	this.setState({chartSelectorState: newValue});
+	// 	console.log(this.state.chartSelectorState);
+	// };
 	 
-	const initialSelectedIndex = selectorOptions.findIndex(({value}) => value === "Combined");
-  	var chart1Options = {
-  		animationEnabled: true,
-  		theme: "light2",
-  		title: {text: "Your Results"},
-  		axisX: {title: "Category",reversed:true},
-  		axisY: {title: "Score",includeZero:true,labelFormatter:this.addSymbols, interval:5},
-  		toolTip: {shared: true},
-  		data:[
-  		{
-  			type:"bar",
-  			name: "Total score",
-  			toolTipContent: "<b>{label}</b> <br> <span style= color: #4F81BC>{name}</span>: {y}",
-  			dataPoints:[
-  				{y:(this.state.section_scores[0] + this.state.section_scores[1]), label: "Section 1", color: "#f3a4a8"},
-				{y:(this.state.section_scores[2] + this.state.section_scores[3]), label: "Section 2"},
-				{y:(this.state.section_scores[4] + this.state.section_scores[5]), label: "Section 3"},
-				{y:(this.state.section_scores[6] + this.state.section_scores[7]), label: "Section 4"},
-				{y:(this.state.section_scores[8] + this.state.section_scores[9]), label: "Section 5"},
-				{y:this.state.section_scores[10], label: "Total"}
-  			]
-  		},
-  		{
-  			type: "error",
-  			name: "Ideal range",
-  			toolTipContent: "<span style=color:#C0504E>{name}</span>: {y[0]} - {y[1]}",
-  			dataPoints:[
-  				{y:[(7),(11)], label: "Section 1"},
-				{y:[(13),(15)], label: "Section 2"},
-				{y:[(20),(26)], label: "Section 3"},
-				{y:[(7),(11)], label: "Section 4"},
-				{y:[(13),(15)], label: "Section 5"},
-				{y:[(20),(26)], label: "Total"}   
-  			]
-  		}]
-	  };
-	var chart2Options = {
-		animationEnabled: true,
-		theme: "light2",
-		title: {text: "Your Results"},
-		axisX: {title: "Category",reversed:true},
-		axisY: {title: "Score",includeZero:true,labelFormatter:this.addSymbols, interval:5},
-		toolTip: {shared: true},
-		data:[
-		{
-			type:"bar",
-			name: "Historical score",
-			toolTipContent: "<b>{label}</b> <br> <span style= color: #4F81BC>{name}</span>: {y}",
-			dataPoints:[
-				{y:this.state.section_scores[0], label: "Section 1", color: "#f3a4a8"},
-			  {y:this.state.section_scores[2], label: "Section 2"},
-			  {y:this.state.section_scores[4], label: "Section 3"},
-			  {y:this.state.section_scores[6], label: "Section 4"},
-			  {y:this.state.section_scores[8], label: "Section 5"},
-			  {y:this.state.section_scores[10], label: "Total"}
-			]
-		},
-		{
-			type: "error",
-			name: "Ideal range",
-			toolTipContent: "<span style=color:#C0504E>{name}</span>: {y[0]} - {y[1]}",
-			dataPoints:[
-			  {y:[(7),(11)], label: "Section 1"},
-			  {y:[(13),(15)], label: "Section 2"},
-			  {y:[(20),(26)], label: "Section 3"},
-			  {y:[(7),(11)], label: "Section 4"},
-			  {y:[(13),(15)], label: "Section 5"},
-			  {y:[(20),(26)], label: "Total"}   
-			]
-		}]
-	};
-	var chart3Options = {
-		animationEnabled: true,
-		theme: "light2",
-		title: {text: "Your Results"},
-		axisX: {title: "Category",reversed:true},
-		axisY: {title: "Score",includeZero:true,labelFormatter:this.addSymbols, interval:5},
-		toolTip: {shared: true},
-		data:[
-		{
-			type:"bar",
-			name: "Total score",
-			toolTipContent: "<b>{label}</b> <br> <span style= color: #4F81BC>{name}</span>: {y}",
-			dataPoints:[
-				{y: this.state.section_scores[1], label: "Section 1", color: "#f3a4a8"},
-			  {y: this.state.section_scores[3], label: "Section 2"},
-			  {y: this.state.section_scores[5], label: "Section 3"},
-			  {y: this.state.section_scores[7], label: "Section 4"},
-			  {y: this.state.section_scores[9], label: "Section 5"},
-			  {y: this.state.section_scores[10], label: "Total"}
-			]
-		},
-		{
-			type: "error",
-			name: "Ideal range",
-			toolTipContent: "<span style=color:#C0504E>{name}</span>: {y[0]} - {y[1]}",
-			dataPoints:[
-				{y:[(7),(11)], label: "Section 1"},
-			  {y:[(13),(15)], label: "Section 2"},
-			  {y:[(20),(26)], label: "Section 3"},
-			  {y:[(7),(11)], label: "Section 4"},
-			  {y:[(13),(15)], label: "Section 5"},
-			  {y:[(20),(26)], label: "Total"}   
-			]
-		}]
-	};
+	// const initialSelectedIndex = selectorOptions.findIndex(({value}) => value === "Combined");
+  	// var chart1Options = {
+  	// 	animationEnabled: true,
+  	// 	theme: "light2",
+  	// 	title: {text: "Your Results"},
+  	// 	axisX: {title: "Category",reversed:true},
+  	// 	axisY: {title: "Score",includeZero:true,labelFormatter:this.addSymbols, interval:5},
+  	// 	toolTip: {shared: true},
+  	// 	data:[
+  	// 	{
+  	// 		type:"bar",
+  	// 		name: "Total score",
+  	// 		toolTipContent: "<b>{label}</b> <br> <span style= color: #4F81BC>{name}</span>: {y}",
+  	// 		dataPoints:[
+  	// 			{y:(this.state.section_scores[0] + this.state.section_scores[1]), label: "Section 1", color: "#f3a4a8"},
+	// 			{y:(this.state.section_scores[2] + this.state.section_scores[3]), label: "Section 2"},
+	// 			{y:(this.state.section_scores[4] + this.state.section_scores[5]), label: "Section 3"},
+	// 			{y:(this.state.section_scores[6] + this.state.section_scores[7]), label: "Section 4"},
+	// 			{y:(this.state.section_scores[8] + this.state.section_scores[9]), label: "Section 5"},
+	// 			{y:this.state.section_scores[10], label: "Total"}
+  	// 		]
+  	// 	},
+  	// 	{
+  	// 		type: "error",
+  	// 		name: "Ideal range",
+  	// 		toolTipContent: "<span style=color:#C0504E>{name}</span>: {y[0]} - {y[1]}",
+  	// 		dataPoints:[
+  	// 			{y:[(7),(11)], label: "Section 1"},
+	// 			{y:[(13),(15)], label: "Section 2"},
+	// 			{y:[(20),(26)], label: "Section 3"},
+	// 			{y:[(7),(11)], label: "Section 4"},
+	// 			{y:[(13),(15)], label: "Section 5"},
+	// 			{y:[(20),(26)], label: "Total"}   
+  	// 		]
+  	// 	}]
+	//   };
+	// var chart2Options = {
+	// 	animationEnabled: true,
+	// 	theme: "light2",
+	// 	title: {text: "Your Results"},
+	// 	axisX: {title: "Category",reversed:true},
+	// 	axisY: {title: "Score",includeZero:true,labelFormatter:this.addSymbols, interval:5},
+	// 	toolTip: {shared: true},
+	// 	data:[
+	// 	{
+	// 		type:"bar",
+	// 		name: "Historical score",
+	// 		toolTipContent: "<b>{label}</b> <br> <span style= color: #4F81BC>{name}</span>: {y}",
+	// 		dataPoints:[
+	// 			{y:this.state.section_scores[0], label: "Section 1", color: "#f3a4a8"},
+	// 		  {y:this.state.section_scores[2], label: "Section 2"},
+	// 		  {y:this.state.section_scores[4], label: "Section 3"},
+	// 		  {y:this.state.section_scores[6], label: "Section 4"},
+	// 		  {y:this.state.section_scores[8], label: "Section 5"},
+	// 		  {y:this.state.section_scores[10], label: "Total"}
+	// 		]
+	// 	},
+	// 	{
+	// 		type: "error",
+	// 		name: "Ideal range",
+	// 		toolTipContent: "<span style=color:#C0504E>{name}</span>: {y[0]} - {y[1]}",
+	// 		dataPoints:[
+	// 		  {y:[(7),(11)], label: "Section 1"},
+	// 		  {y:[(13),(15)], label: "Section 2"},
+	// 		  {y:[(20),(26)], label: "Section 3"},
+	// 		  {y:[(7),(11)], label: "Section 4"},
+	// 		  {y:[(13),(15)], label: "Section 5"},
+	// 		  {y:[(20),(26)], label: "Total"}   
+	// 		]
+	// 	}]
+	// };
+	// var chart3Options = {
+	// 	animationEnabled: true,
+	// 	theme: "light2",
+	// 	title: {text: "Your Results"},
+	// 	axisX: {title: "Category",reversed:true},
+	// 	axisY: {title: "Score",includeZero:true,labelFormatter:this.addSymbols, interval:5},
+	// 	toolTip: {shared: true},
+	// 	data:[
+	// 	{
+	// 		type:"bar",
+	// 		name: "Total score",
+	// 		toolTipContent: "<b>{label}</b> <br> <span style= color: #4F81BC>{name}</span>: {y}",
+	// 		dataPoints:[
+	// 			{y: this.state.section_scores[1], label: "Section 1", color: "#f3a4a8"},
+	// 		  {y: this.state.section_scores[3], label: "Section 2"},
+	// 		  {y: this.state.section_scores[5], label: "Section 3"},
+	// 		  {y: this.state.section_scores[7], label: "Section 4"},
+	// 		  {y: this.state.section_scores[9], label: "Section 5"},
+	// 		  {y: this.state.section_scores[10], label: "Total"}
+	// 		]
+	// 	},
+	// 	{
+	// 		type: "error",
+	// 		name: "Ideal range",
+	// 		toolTipContent: "<span style=color:#C0504E>{name}</span>: {y[0]} - {y[1]}",
+	// 		dataPoints:[
+	// 			{y:[(7),(11)], label: "Section 1"},
+	// 		  {y:[(13),(15)], label: "Section 2"},
+	// 		  {y:[(20),(26)], label: "Section 3"},
+	// 		  {y:[(7),(11)], label: "Section 4"},
+	// 		  {y:[(13),(15)], label: "Section 5"},
+	// 		  {y:[(20),(26)], label: "Total"}   
+	// 		]
+	// 	}]
+	// };
 	var qarr1 = [];
 	for(const key in qs1_dict){
 		qarr1.push(key);
@@ -490,44 +498,51 @@ class LASR extends Component {
           hideRequiredErrors={true}
           />
         ) : null
-      var displayResults = this.state.isCompleted ? (
-	      	<div>
-			  <div>
-				  <SwitchSelector
-						onChange={onChange}
-						options={selectorOptions}
-						initialSelectedIndex={initialSelectedIndex}
-						backgroundColor={"#808080"}
-						fontColor={"#000000"}
-					/>
-			  </div>
-	  		  <div>
-				  {this.state.chartSelectorState === "Combined" && 
-				  <CanvasJSChart options = {chart1Options}/>}
-			  </div>
-			  <div>
-			      {this.state.chartSelectorState === "Historical" && 
-				  <CanvasJSChart options = {chart2Options}/>}
-			  </div>
-			  <div>
-			      {this.state.chartSelectorState === "Contemporary" && 
-				  <CanvasJSChart options = {chart3Options}/>}
-			  </div>
-	        </div>
-        ) : null;
+    //   var displayResults = this.state.isCompleted ? (
+	//       	<div>
+	// 		  <div>
+	// 			  <SwitchSelector
+	// 					onChange={onChange}
+	// 					options={selectorOptions}
+	// 					initialSelectedIndex={initialSelectedIndex}
+	// 					backgroundColor={"#808080"}
+	// 					fontColor={"#000000"}
+	// 				/>
+	// 		  </div>
+	//   		  <div>
+	// 			  {this.state.chartSelectorState === "Combined" && 
+	// 			  <CanvasJSChart options = {chart1Options}/>}
+	// 		  </div>
+	// 		  <div>
+	// 		      {this.state.chartSelectorState === "Historical" && 
+	// 			  <CanvasJSChart options = {chart2Options}/>}
+	// 		  </div>
+	// 		  <div>
+	// 		      {this.state.chartSelectorState === "Contemporary" && 
+	// 			  <CanvasJSChart options = {chart3Options}/>}
+	// 		  </div>
+	//         </div>
+    //     ) : null;
       var onSurveyCompletion = this.state.isCompleted ? (
-          <div> <h1>Thank you for taking the LASR</h1> </div>
+          <div>
+			  <h1>You've now completed the first portion of the LASR</h1>
+			  <h2>
+				  The next section is unscored, and asks specific questions about your past and present. 
+				  Please answer them to the best of your ability. We understand if you cannot recall every detail.
+			  </h2>
+			  <Button onClick={this.continue}>Next Section</Button>
+		  </div>
         ) : null;
     return (
       <div className="section1">
         <div>
           {surveyRender}
           {onSurveyCompletion}
-          <pre>{displayResults}</pre>
+          {/* <pre>{displayResults}</pre> */}
         </div>
       </div>
     );
   }
 }
 
-export default LASR;
+export default Scored;
