@@ -644,3 +644,34 @@ td.td.sv_matrix_cell .sv_qbln {
 .sv_q:hover .sv_q_erbox {
   display: none;
 }
+.custom_question_title {
+  padding-top: 10px;
+  /*padding-bottom: 30px;*/
+}
+.custom_question {
+  padding-bottom: 20px;
+}
+ /* .sv_qstn .sq-root {
+  border: 1px solid gray;
+  border-left: 4px solid #18a689;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 30px;
+} */
+
+/* .sv_qstn .sq-root-txt {
+
+} */
+
+.sq-title-txt {
+  font-size: 15px;
+  margin-left: 20px;
+  /* padding-top: 0px; */
+}
+
+.sq-label {
+  margin-left: 30px;
+}
+.sq-item:nth-child(1) {
+  margin-bottom: 5px;
+}

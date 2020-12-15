@@ -495,7 +495,7 @@ class Scored extends Component {
           json={json}
           showCompletedPage={false}
           onComplete={this.onCompleteComponent}
-          hideRequiredErrors={true}
+		  hideRequiredErrors={true}
           />
         ) : null
     //   var displayResults = this.state.isCompleted ? (
@@ -522,7 +522,7 @@ class Scored extends Component {
 	// 			  <CanvasJSChart options = {chart3Options}/>}
 	// 		  </div>
 	//         </div>
-    //     ) : null;
+	//     ) : null;
       var onSurveyCompletion = this.state.isCompleted ? (
           <div>
 			  <h1>You've now completed the first portion of the LASR</h1>
