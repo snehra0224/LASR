@@ -27,6 +27,14 @@ class Unscored extends Component{
           classes.title += " sq-title-txt";
           classes.root += " sq-root-txt";
       }
+      if (options.question.getType() === "matrixdropdown") {
+        classes.title += " sq-title-mtx";
+        classes.root += " sq-root-mtx";
+      }
+      if (options.question.name === "How many?") {
+        classes.title += " sq-title-pnl";
+        classes.root += " sq-root-pnl";
+      }
     }
       render(){
       var json = 
@@ -67,9 +75,9 @@ class Unscored extends Component{
                },
                {
                 "type": "text",
-                "name": "question9",
+                "name": "Foster text",
                 "visible": false,
-                "visibleIf": "{Food/Housing/Child Welfare/Foster.Foster Care.Select one or more} = ['Currently'] or {Food/Housing/Child Welfare/Foster.Foster Care.Select one or more} = ['In the past']",
+                "visibleIf": "{Food/Housing/Child Welfare/Foster.Foster Care.Select one or more} = ['Currently'] or {Food/Housing/Child Welfare/Foster.Foster Care.Select one or more} = ['In the past'] or {Food/Housing/Child Welfare/Foster.Foster Care.Select one or more} = ['Currently','In the past']",
                 "title": "How many placements did you have in foster care?",
                 "indent": 10,
                 "titleLocation": "left",
@@ -79,113 +87,111 @@ class Unscored extends Component{
              },
              {
               "type": "panel",
-              "name": "question2",
+              "name": "Lower left 1",
               "elements": [
-               {
-                "type": "matrixdropdown",
-                "name": "question5",
-                "titleLocation": "hidden",
-                "columns": [
-                 {
-                  "name": " ",
-                  "isRequired": true
+                {
+                  "type": "matrixdropdown",
+                  "name": "Juvenile Detention",
+                  "titleLocation": "hidden",
+                  "rowTitleWidth": "300px",
+                  "columns": [
+                   {
+                    "name": "Select one or more",
+                    "isRequired": true
+                   }
+                  ],
+                  "choices": [
+                   "Currently",
+                   "In the past",
+                   "Never"
+                  ],
+                  "cellType": "checkbox",
+                  "rows": [
+                   "Diversion",
+                   "Probation",
+                   "Short term detention",
+                   "Secure Facility long term placement"
+                  ]
                  }
-                ],
-                "choices": [
-                 "Currently",
-                 "In the past"
-                ],
-                "cellType": "checkbox",
-                "rows": [
-                 "Diversion"
-                ]
-               },
-               {
-                "type": "matrixdropdown",
-                "name": "question7",
-                "titleLocation": "hidden",
-                "columns": [
-                 {
-                  "name": " ",
-                  "isRequired": true
-                 }
-                ],
-                "choices": [
-                 "Currently",
-                 "In the past"
-                ],
-                "cellType": "checkbox",
-                "rows": [
-                 "Row 1"
-                ]
-               },
-               {
-                "type": "matrixdropdown",
-                "name": "question7",
-                "titleLocation": "hidden",
-                "columns": [
-                 {
-                  "name": " ",
-                  "isRequired": true
-                 }
-                ],
-                "choices": [
-                 "Currently",
-                 "In the past"
-                ],
-                "cellType": "checkbox",
-                "rows": [
-                 "Row 1"
-                ]
-               },
-               {
-                "type": "matrixdropdown",
-                "name": "question7",
-                "titleLocation": "hidden",
-                "columns": [
-                 {
-                  "name": " ",
-                  "isRequired": true
-                 }
-                ],
-                "choices": [
-                 "Currently",
-                 "In the past"
-                ],
-                "cellType": "checkbox",
-                "rows": [
-                 "Row 1"
-                ]
-               }
               ],
-              "title": "Please indicate if you have been in any of the following as part of the juvenile justice system."
+              "title": "Please indicate if you have been in any of the following as part of the juvenile justice system.",
+              "width": "700px"
              },
              {
               "type": "panel",
-              "name": "question4",
+              "name": "Lower Right 1",
               "elements": [
-               {
-                "type": "text",
-                "name": "question6",
-                "title": "How many times?"
-               },
-               {
-                "type": "text",
-                "name": "question8",
-                "title": "How many times?"
-               },
-               {
-                "type": "text",
-                "name": "question8",
-                "title": "How many times?"
-               },
-               {
-                "type": "text",
-                "name": "question8",
-                "title": "How many times?"
-               }
+                {
+                  "type": "matrixdropdown",
+                  "titleLocation": "hidden",
+                  "name": "question10",
+                  "columns": [
+                   {
+                    "name": "Type here, if applicable.",
+                    "cellType": "text"
+                   }
+                  ],
+                  "cellType": "text",
+                  "rows": [" ", " ", " ", " "]
+                 }
               ],
-              "startWithNewLine": false
+              "title": "How many times?",
+              "startWithNewLine": false,
+              "width": "260px"
+             },
+             {
+              "type": "panel",
+              "name": "Lower left 2",
+              "elements": [
+                {
+                  "type": "matrixdropdown",
+                  "name": "Juvenile Detention",
+                  "titleLocation": "hidden",
+                  "rowTitleWidth": "300px",
+                  "columns": [
+                   {
+                    "name": "Select one or more",
+                    "isRequired": true
+                   }
+                  ],
+                  "choices": [
+                   "Currently",
+                   "In the past",
+                   "Never"
+                  ],
+                  "cellType": "checkbox",
+                  "rows": [
+                   "Diversion",
+                   "Probation",
+                   "Imprisoned for a sentence of 1 year or less",
+                   "Imprisoned for a sentence of 1 year or more"
+                  ]
+                 }
+              ],
+              "title": "Please indicate if you have been in any of the following as part of the adult corrections system.",
+              "width": "700px"
+             },
+             {
+              "type": "panel",
+              "name": "Lower Right 2",
+              "elements": [
+                {
+                  "type": "matrixdropdown",
+                  "titleLocation": "hidden",
+                  "name": "question10",
+                  "columns": [
+                   {
+                    "name": "Type here, if applicable.",
+                    "cellType": "text"
+                   }
+                  ],
+                  "cellType": "text",
+                  "rows": [" ", " ", " ", " "]
+                 }
+              ],
+              "title": "How many times?",
+              "startWithNewLine": false,
+              "width": "260px"
              }
             ]
            }
@@ -193,130 +199,6 @@ class Unscored extends Component{
           "showQuestionNumbers": "off",
           "requiredText": ""
          };
-        // {
-        //     title: "LASR",
-        //     requiredText: "",
-        //     showQuestionNumbers: "off",
-        //     pages: [
-        //         {
-        //           title: "Please indicate if you have engaged with the following services in the past, and if you are now.",
-        //           questions: [
-        //             {
-        //                 type: "matrixdropdown",
-        //                 name: "foodAssist",
-        //                 title: " ",
-        //                 isRequired: true,
-        //                 columns: [
-        //                   {
-        //                    "name": " "
-        //                   }
-        //                 ],
-        //                 choices: [
-        //                     "In the past", "Currently"
-        //                 ],
-        //                 cellType: "checkbox",
-        //                 rows: ["Food Assistance"]
-        //               },
-        //               {
-        //                 type: "matrixdropdown",
-        //                 name: "housingAssist",
-        //                 title: " ",
-        //                 isRequired: true,
-        //                 columns: [
-        //                   {
-        //                    "name": " "
-        //                   }
-        //                 ],
-        //                 choices: [
-        //                     "In the past", "Currently"
-        //                 ],
-        //                 cellType: "checkbox",
-        //                 rows: ["Housing Assistance"]
-        //               }
-        //             // }, {
-        //             //     type: "dropdown",
-        //             //     name: "kids",
-        //             //     title: "How many kids do you have",
-        //             //     visibleIf: "{haveKids}='Yes'",
-        //             //     isRequired: true,
-        //             //     choices: [1, 2, 3, 4, 5]
-        //             // }, {
-        //             //     type: "dropdown",
-        //             //     name: "kid1Age",
-        //             //     title: "The first kid age:",
-        //             //     visibleIf: "{haveKids}='Yes' and {kids} >= 1",
-        //             //     isRequired: true,
-        //             //     "choicesMax": 18
-        //             // }, {
-        //             //     type: "dropdown",
-        //             //     name: "kid2Age",
-        //             //     title: "The second kid age:",
-        //             //     visibleIf: "{haveKids}='Yes' and {kids} >= 2",
-        //             //     isRequired: true,
-        //             //     startWithNewLine: false,
-        //             //     "choicesMax": 18
-        //             // }, {
-        //             //     type: "dropdown",
-        //             //     name: "kid3Age",
-        //             //     title: "The third kid age:",
-        //             //     visibleIf: "{haveKids}='Yes' and {kids} >= 3",
-        //             //     isRequired: true,
-        //             //     startWithNewLine: false,
-        //             //     "choicesMax": 18
-        //             // }, {
-        //             //     type: "dropdown",
-        //             //     name: "kid4Age",
-        //             //     title: "The fourth kid age:",
-        //             //     visibleIf: "{haveKids}='Yes' and {kids} >= 4",
-        //             //     isRequired: true,
-        //             //     startWithNewLine: false,
-        //             //     "choicesMax": 18
-        //             // }, {
-        //             //     type: "dropdown",
-        //             //     name: "kid5Age",
-        //             //     title: "The fifth kid age:",
-        //             //     visibleIf: "{haveKids}='Yes' and {kids} >= 5",
-        //             //     isRequired: true,
-        //             //     startWithNewLine: false,
-        //             //     "choicesMax": 18
-        //             // }
-        //           ]
-        //         },
-        //         {
-        //           name: "page1",
-        //           elements: [
-        //             {
-        //               type: "matrixdropdown",
-        //               name: " ",
-        //               columns: [
-        //                   {
-        //                   name: " "
-        //                   },
-        //                 ],
-        //               choices: [
-        //               1,
-        //               2,
-        //               3,
-        //               4,
-        //               5
-        //               ],
-        //               cellType: "checkbox",
-        //               rows: [
-        //               "Row 1",
-        //               "Row 2"
-        //               ]
-        //             }
-        //             ]
-        //           }
-        //       ]
-        // };
-        // var myCss = {
-        //   question: {
-        //     mainRoot: "sv_qstn custom_question",
-        //     title: "custom_question_title"
-        //   }
-        // };
-        // var survey = new Survey.Model(json);
         var surveyRender = !this.state.isCompleted ? (
             <Survey.Survey
               json={json}
@@ -324,7 +206,6 @@ class Unscored extends Component{
               onComplete={this.onCompleteComponent}
               onUpdateQuestionCssClasses={this.onUpdateQuestionCssClasses}
               hideRequiredErrors={true}
-              // css={myCss}
               />
             ) : null
         return(
