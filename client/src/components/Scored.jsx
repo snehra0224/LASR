@@ -85,11 +85,23 @@ class Scored extends Component {
 	for(var v in scores){
 		sum += scores[v];
 	}
+	console.log(sum);
 	scores.push(sum);
 	// this.setState({section_scores: scores});
 	this.props.setScores(scores);
-	var t = this.props;
-    Axios.post(`http://localhost:3001/api/insert`, {section1_score: scores[0], section2_score: scores[1], total_score: scores[2], idString: t})
+	console.log(this.props.idString);
+	Axios.post(`http://localhost:3001/api/insertScores`, {idString: this.props.idString,
+													section1_score_h: scores[0], 
+													section1_score_c: scores[1], 
+													section2_score_h: scores[2],
+													section2_score_c: scores[3],
+													section3_score_h: scores[4],
+													section3_score_c: scores[5],
+													section4_score_h: scores[6],
+													section4_score_c: scores[7],
+													section5_score_h: scores[8],
+													section5_score_c: scores[9],
+													total_score: scores[10]})
     .then(() => {
     	alert("Insert succesful");
     });

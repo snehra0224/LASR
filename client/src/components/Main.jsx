@@ -18,9 +18,6 @@ class Main extends Component {
     }
 
      render(){
-        return <Unscored
-        nextStep = {this.nextStep}
-        />
         // const {step} = this.state;
         // switch(step){
         //     case 1: 
@@ -40,6 +37,9 @@ class Main extends Component {
         //                 nextStep = {this.nextStep}
         //                 />
         // }
+        return <Unscored
+        nextStep = {this.nextStep}
+        />
     }
 }
 export default Main;

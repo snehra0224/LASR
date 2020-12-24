@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import * as Survey from "survey-react";
 import {Button} from 'semantic-ui-react';
+import Axios from 'axios';
 import './Scored.css';
 
 class Unscored extends Component{
@@ -10,10 +11,31 @@ class Unscored extends Component{
             isCompleted: false
         }
     }
+    continue = (e) => {
+      e.preventDefault();
+      this.props.nextStep();
+    }
     onCompleteComponent = (survey) => {
+        var results = survey.data;
+        var questions = survey.getAllQuestions();
+        for(var i = 0; i < questions.length; i++){
+          var q = questions[i];
+          var key = q.getValueName();
+          if(results[key]){
+            continue;
+          }
+          results[key] = null;
+        }
         this.setState({
           isCompleted: true
         })
+        console.log(survey.data);
+        console.log(JSON.stringify(survey.data));
+        console.log(JSON.parse(JSON.stringify(survey.data)));
+        Axios.post(`http://localhost:3001/api/insertJSON`, {json: results})
+        .then(() => {
+          alert("Insert successful");
+        });
     }
     onUpdateQuestionCssClasses = (survey, options) => {
       var classes = options.cssClasses
@@ -79,6 +101,7 @@ class Unscored extends Component{
                 "visible": false,
                 "visibleIf": "{Food/Housing/Child Welfare/Foster.Foster Care.Select one or more} = ['Currently'] or {Food/Housing/Child Welfare/Foster.Foster Care.Select one or more} = ['In the past'] or {Food/Housing/Child Welfare/Foster.Foster Care.Select one or more} = ['Currently','In the past']",
                 "title": "How many placements did you have in foster care?",
+                "defaultValue": "0",
                 "indent": 10,
                 "titleLocation": "left",
                 "maxWidth": "1000px"
@@ -122,17 +145,16 @@ class Unscored extends Component{
               "name": "Lower Right 1",
               "elements": [
                 {
-                  "type": "matrixdropdown",
+                  "type": "matrixdynamic",
                   "titleLocation": "hidden",
-                  "name": "question10",
+                  "name": "Juvenile how many",
                   "columns": [
-                   {
-                    "name": "Type here, if applicable.",
-                    "cellType": "text"
-                   }
+                    {"name":"Type here, if applicable."}
                   ],
                   "cellType": "text",
-                  "rows": [" ", " ", " ", " "]
+                  "rowCount": 4,
+                  "allowAddRows": false,
+                  "allowRemoveRows": false
                  }
               ],
               "title": "How many times?",
@@ -145,7 +167,7 @@ class Unscored extends Component{
               "elements": [
                 {
                   "type": "matrixdropdown",
-                  "name": "Juvenile Detention",
+                  "name": "Adult Corrections",
                   "titleLocation": "hidden",
                   "rowTitleWidth": "300px",
                   "columns": [
@@ -176,17 +198,16 @@ class Unscored extends Component{
               "name": "Lower Right 2",
               "elements": [
                 {
-                  "type": "matrixdropdown",
+                  "type": "matrixdynamic",
                   "titleLocation": "hidden",
-                  "name": "question10",
+                  "name": "Adult how many",
                   "columns": [
-                   {
-                    "name": "Type here, if applicable.",
-                    "cellType": "text"
-                   }
+                   {"name": "Type here, if applicable."}
                   ],
                   "cellType": "text",
-                  "rows": [" ", " ", " ", " "]
+                  "rowCount": 4,
+                  "allowAddRows": false,
+                  "allowRemoveRows": false
                  }
               ],
               "title": "How many times?",
@@ -199,6 +220,15 @@ class Unscored extends Component{
           "showQuestionNumbers": "off",
           "requiredText": ""
          };
+         var onSurveyCompletion = this.state.isCompleted ? (
+          <div>
+			        <h1>Congratulations, you've completed the LASR!</h1>
+			        <h2>
+                  It was a long assessment, and we appreciate you taking the time to complete it. Click ahead to view your scores.
+			        </h2>
+			       <Button onClick={this.continue}>My scores</Button>
+		      </div>
+        ) : null;
         var surveyRender = !this.state.isCompleted ? (
             <Survey.Survey
               json={json}
@@ -211,6 +241,7 @@ class Unscored extends Component{
         return(
             <div>
               {surveyRender}
+              {onSurveyCompletion}
             </div>
         )
     }
