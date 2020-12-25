@@ -106,7 +106,8 @@ class Unscored extends Component{
                 "titleLocation": "left",
                 "maxWidth": "1000px"
                }
-              ]
+              ],
+              "title": "Please indicate if you have ever been in or used the following systems."
              },
              {
               "type": "panel",
@@ -215,11 +216,64 @@ class Unscored extends Component{
               "width": "260px"
              }
             ]
+           },
+           {
+            "name": "page2",
+            "elements": [
+              {
+                "type": "panel",
+                "elements": [
+                 {
+                  "type": "matrixdropdown",
+                  "name": "Behaviors",
+                  "titleLocation": "hidden",
+                  "columns": [
+                   {
+                    "name": "Select one or more",
+                    "isRequired": true
+                   }
+                  ],
+                  "choices": [
+                   "I have never done this",
+                   "I have done this",
+                   "I have been criminally convicted of this"
+                  ],
+                  "cellType": "checkbox",
+                  "rows": [
+                   "Aggression",
+                   "Violence",
+                   "Cruelty",
+                   "Bullying",
+                   "Intimidation",
+                   "Destruction of property",
+                   "Lying",
+                   "Theft",
+                   "Assault",
+                   "Battery",
+                   "Drug Use",
+                   "Possession of drugs with intent to sell",
+                   "Breaking and entering",
+                   "Forgery",
+                   "Passing counterfeit bills",
+                   "Extortion",
+                   "Purse snatching",
+                   "Initiating physical fights",
+                   "Assault with a deadly weapon",
+                   "Truancy or breaking curfew",
+                   "Running away from home",
+                   "Cruelty towards animals",
+                   "Forcing someone into sexual activity"
+                  ]
+                 },
+                ]
            }
           ],
           "showQuestionNumbers": "off",
-          "requiredText": ""
-         };
+          "requiredText": "",
+          "title": "Please indicate if you have ever engaged in the following behaviors."
+        }
+      ]
+      };
          var onSurveyCompletion = this.state.isCompleted ? (
           <div>
 			        <h1>Congratulations, you've completed the LASR!</h1>
