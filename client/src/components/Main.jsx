@@ -38,7 +38,8 @@ class Main extends Component {
         //                 />
         // }
         return <Unscored
-        nextStep = {this.nextStep}
+            nextStep = {this.nextStep}
+            idString = {this.state.idString}
         />
     }
 }

@@ -42,9 +42,9 @@ app.post("/api/insertScores", (req,res) => {
 	});
 });
 
-app.post("/api/insertJSON", (req,res) => {
+app.post("/api/insertSystemEngagement", (req,res) => {
+	const idString = req.body.idString;
 	const unscored_data = req.body.json;
-	console.log(unscored_data);
 	var temp = unscored_data['Food/Housing/Child Welfare/Foster'];
 	var foodAssist = '';
 	var houseAssist = '';
@@ -167,11 +167,33 @@ app.post("/api/insertJSON", (req,res) => {
 			a_long_term = text;
 		}
 	}
-	const sqlInsert = "INSERT INTO user_results (unscored_data) VALUES (?)";
-	db.query(sqlInsert, [{unscored_data}], (err, result) => {
+	const sqlInsert = "INSERT INTO user_system_engagement (idString, foodAssist, houseAssist, childWelfare, foster, foster_num, j_div, j_div_num, j_p, j_p_num, j_short_term, j_short_term_num, j_long_term, j_long_term_num, a_div, a_div_num, a_p, a_p_num, a_short_term, a_short_term_num, a_long_term, a_long_term_num) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	db.query(sqlInsert, [idString, foodAssist, houseAssist, childWelfare, foster, foster_num, j_div, j_div_num, j_p, j_p_num, j_short_term, j_short_term_num, j_long_term, j_long_term_num, a_div, a_div_num, a_p, a_p_num, a_short_term, a_short_term_num, a_long_term, a_long_term_num], (err, result) => {
 		console.log(err);
 	});
-	console.log("success");
+	console.log("success1");
+});
+
+app.post("/api/insertBehaviors", (req,res) => {
+	const idString = req.body.idString;
+	const data = req.body.json;
+	var toPass = [idString];
+	for(var i in data){
+		temp = data[i]['Select one or more'];
+		text = '';
+		for(var j in temp){
+			if(j != 0){
+				text += ', ';
+			}
+			text += temp[j];
+		}
+		toPass.push(text);
+	}
+	const sqlInsert = "INSERT INTO user_behaviors (idString, aggression, violence, cruelty, bullying, intimidation, destruction_of_property, lying, theft, assault, battery, drug_use, possession_drugs_sell, breaking_entering, forgery, counterfeit_bills, extortion, purse_snatching, physical_fights, assault_deadly_weapon, truancy_breaking_curfew, running_from_home, cruelty_animals, forcing_sexual_activity) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	db.query(sqlInsert, toPass, (err, result) => {
+		console.log(err);
+	});
+	console.log("success2");
 });
 
 app.listen(3001, () => {

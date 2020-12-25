@@ -29,10 +29,11 @@ class Unscored extends Component{
         this.setState({
           isCompleted: true
         })
-        console.log(survey.data);
-        console.log(JSON.stringify(survey.data));
-        console.log(JSON.parse(JSON.stringify(survey.data)));
-        Axios.post(`http://localhost:3001/api/insertJSON`, {json: results})
+        Axios.post(`http://localhost:3001/api/insertSystemEngagement`, {idString: this.props.idString, json: results})
+        .then(() => {
+          alert("Insert successful");
+        });
+        Axios.post(`http://localhost:3001/api/insertBehaviors`, {idString: this.props.idString, json: results['Behaviors']})
         .then(() => {
           alert("Insert successful");
         });
@@ -266,7 +267,7 @@ class Unscored extends Component{
                   ]
                  },
                 ]
-           }
+              }
           ],
           "showQuestionNumbers": "off",
           "requiredText": "",
