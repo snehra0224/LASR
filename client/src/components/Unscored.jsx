@@ -272,7 +272,52 @@ class Unscored extends Component{
           "showQuestionNumbers": "off",
           "requiredText": "",
           "title": "Please indicate if you have ever engaged in the following behaviors."
-        }
+        },
+        {
+          "name": "page3",
+          "elements": [
+            {
+              "type": "panel",
+              "elements": [
+               {
+                "type": "matrixdropdown",
+                "name": "Psych",
+                "titleLocation": "hidden",
+                "columns": [
+                 {
+                  "name": "Mark all that apply.",
+                  "isRequired": true
+                 }
+                ],
+                "choices": [
+                 "Current diagnosis",
+                 "Diagnosed in the past",
+                 "Parental history"
+                ],
+                "cellType": "checkbox",
+                "rows": [
+                  "Anxiety",
+                  "Depression",
+                  "Conduct Disorder",
+                  "Intermittent Explosive Disorder",
+                  "Impluse Control Disorder",
+                  "Posttraumatic Stress Disorder (PTSD)",
+                  "Major Depressive Disorder",
+                  "Bipolar Disorder",
+                  "Psychotic Disorder",
+                  "Poly/substance abuse",
+                  "Attention Deficit Hyperactivity Disorder (ADHD)",
+                  "Autism Spectrum Disorder",
+                  "Insomnia"
+                ]
+               },
+              ]
+            }
+        ],
+        "showQuestionNumbers": "off",
+        "requiredText": "",
+        "title": "Please indicate if you or a parent have been diagnosed with the following."
+      }
       ]
       };
          var onSurveyCompletion = this.state.isCompleted ? (
