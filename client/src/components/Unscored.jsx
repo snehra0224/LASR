@@ -41,6 +41,10 @@ class Unscored extends Component{
         .then(() => {
           alert("Insert successful");
         });
+        Axios.post(`http://localhost:3001/api/insertPhys`, {idString: this.props.idString, json: results['Phys']})
+        .then(() => {
+          alert("Insert successful");
+        });
     }
     onUpdateQuestionCssClasses = (survey, options) => {
       var classes = options.cssClasses
@@ -321,7 +325,49 @@ class Unscored extends Component{
         "showQuestionNumbers": "off",
         "requiredText": "",
         "title": "Please indicate if you or a parent have been diagnosed with the following."
-      }
+      },
+      {
+        "name": "page4",
+        "elements": [
+          {
+            "type": "panel",
+            "elements": [
+             {
+              "type": "matrixdropdown",
+              "name": "Phys",
+              "titleLocation": "hidden",
+              "columns": [
+               {
+                "name": "Mark all that apply.",
+                "isRequired": true
+               }
+              ],
+              "choices": [
+               "Current diagnosis",
+               "Diagnosed in the past",
+               "Parental history"
+              ],
+              "cellType": "checkbox",
+              "rows": [
+                "High blood pressure",
+                "Insulin resistance",
+                "Diabetes",
+                "Obesity",
+                "Stroke",
+                "Cardiovascular disease",
+                "Heart attack",
+                "Preeclampsia",
+                "Premature birth",
+                "Low birth weight"
+              ]
+             },
+            ]
+          }
+      ],
+      "showQuestionNumbers": "off",
+      "requiredText": "",
+      "title": "Please indicate if you or a parent have been diagnosed with the following."
+    }
       ]
       };
          var onSurveyCompletion = this.state.isCompleted ? (

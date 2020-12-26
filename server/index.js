@@ -218,6 +218,27 @@ app.post("/api/insertPsych", (req,res) => {
 	console.log("success3");
 });
 
+app.post("/api/insertPhys", (req,res) => {
+	const idString = req.body.idString;
+	const data = req.body.json;
+	var toPass = [idString];
+	for(var i in data){
+		temp = data[i]['Mark all that apply.'];
+		text = '';
+		for(var j in temp){
+			if(j != 0){
+				text += ', ';
+			}
+			text += temp[j];
+		}
+		toPass.push(text);
+	}
+	const sqlInsert = "INSERT INTO user_phys (idString, high_bp, insulin_res, diabetes, obesity, stroke, cardio, heart_attack, preeclampsia, premature, low_birth_weight) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+	db.query(sqlInsert, toPass, (err, result) => {
+		console.log(err);
+	});
+	console.log("success4");
+});
 app.listen(3001, () => {
 	console.log("running on port 3001");
 });
