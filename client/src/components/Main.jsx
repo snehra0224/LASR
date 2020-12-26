@@ -18,29 +18,31 @@ class Main extends Component {
     }
 
      render(){
-        // const {step} = this.state;
-        // switch(step){
-        //     case 1: 
-        //         return <StartPage 
-        //                 nextStep = {this.nextStep}
-        //                 idString = {this.state.idString}
-        //                 setID = {(idString) => this.setState({idString})}
-        //                 />
-        //     case 2:
-        //         return <Scored
-        //                 nextStep = {this.nextStep}
-        //                 idString = {this.state.idString}
-        //                 setScores = {(section_scores) => this.setState({section_scores})}
-        //                 />
-        //     case 3:
-        //         return <Unscored
-        //                 nextStep = {this.nextStep}
-        //                 />
-        // }
-        return <Unscored
-            nextStep = {this.nextStep}
-            idString = {this.state.idString}
-        />
+        const {step} = this.state;
+        switch(step){
+            case 1: 
+                return <StartPage 
+                        nextStep = {this.nextStep}
+                        idString = {this.state.idString}
+                        setID = {(idString) => this.setState({idString})}
+                        />
+            case 2:
+                return <Scored
+                        nextStep = {this.nextStep}
+                        idString = {this.state.idString}
+                        setScores = {(section_scores) => this.setState({section_scores})}
+                        />
+            case 3:
+                return <Unscored
+                        nextStep = {this.nextStep}
+                        idString = {this.state.idString}
+                        />
+            case 4:
+                return <Results
+                        section_scores = {this.state.section_scores}
+                        idString = {this.state.idString}
+                        />
+        }
     }
 }
 export default Main;

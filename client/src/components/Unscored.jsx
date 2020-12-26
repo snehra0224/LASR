@@ -6,7 +6,7 @@ import './Scored.css';
 
 class Unscored extends Component{
     constructor(props){
-        super(props);
+      super(props);
         this.state = {
             isCompleted: false
         }
@@ -68,8 +68,7 @@ class Unscored extends Component{
       }
     }
       render(){
-      var json = 
-        {
+      var json = {
           title: "LASR",
           requiredText: "",
           showQuestionNumbers: "off",
