@@ -12,6 +12,6 @@ var qs5_dict =
     "People talked about me in positive ways": 1,
     "I had more than one adult who made sure I was safe and happy": 1,
     "I felt alone/without friends": -1,
-    "People were glad I was around": 1
+    "People were that glad I was around": 1
 }
 export default qs5_dict;
