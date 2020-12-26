@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import * as Survey from "survey-react";
 import {Button} from 'semantic-ui-react';
-// import SwitchSelector from "react-switch-selector";
-// import CanvasJSReact from './canvasjs.react';
 import Axios from 'axios';
 import './Scored.css';
 import qs1_dict from './qs1';
@@ -15,16 +13,12 @@ import qs7_dict from './qs7';
 import qs8_dict from './qs8';
 import qs9_dict from './qs9';
 import qs10_dict from './qs10';
-// var CanvasJS = CanvasJSReact.CanvasJS;
-// var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class Scored extends Component {
   constructor(props){
     super(props)
     this.state = {
-	//   section_scores: [0,0,0,0,0,0,0,0,0,0,0],
-	  qs: [qs1_dict, qs2_dict, qs3_dict, qs4_dict, qs5_dict, qs6_dict, qs7_dict, qs8_dict, qs9_dict, qs10_dict],
-	  chartSelectorState: 'Combined'
+	  qs: [qs1_dict, qs2_dict, qs3_dict, qs4_dict, qs5_dict, qs6_dict, qs7_dict, qs8_dict, qs9_dict, qs10_dict]
     }
     this.onCompleteComponent = this.onCompleteComponent.bind(this)
   }
@@ -87,21 +81,20 @@ class Scored extends Component {
 	}
 	console.log(sum);
 	scores.push(sum);
-	// this.setState({section_scores: scores});
 	this.props.setScores(scores);
 	console.log(this.props.idString);
 	Axios.post(`http://localhost:3001/api/insertScores`, {idString: this.props.idString,
-													section1_score_h: scores[0], 
-													section1_score_c: scores[1], 
-													section2_score_h: scores[2],
-													section2_score_c: scores[3],
-													section3_score_h: scores[4],
-													section3_score_c: scores[5],
-													section4_score_h: scores[6],
-													section4_score_c: scores[7],
-													section5_score_h: scores[8],
-													section5_score_c: scores[9],
-													total_score: scores[10]})
+													section1_h: scores[0], 
+													section1_c: scores[1], 
+													section2_h: scores[2],
+													section2_c: scores[3],
+													section3_h: scores[4],
+													section3_c: scores[5],
+													section4_h: scores[6],
+													section4_c: scores[7],
+													section5_h: scores[8],
+													section5_c: scores[9],
+													total: scores[10]})
     .then(() => {
     	alert("Insert succesful");
     });
@@ -382,31 +375,6 @@ class Scored extends Component {
 		  hideRequiredErrors={true}
           />
         ) : null
-    //   var displayResults = this.state.isCompleted ? (
-	//       	<div>
-	// 		  <div>
-	// 			  <SwitchSelector
-	// 					onChange={onChange}
-	// 					options={selectorOptions}
-	// 					initialSelectedIndex={initialSelectedIndex}
-	// 					backgroundColor={"#808080"}
-	// 					fontColor={"#000000"}
-	// 				/>
-	// 		  </div>
-	//   		  <div>
-	// 			  {this.state.chartSelectorState === "Combined" && 
-	// 			  <CanvasJSChart options = {chart1Options}/>}
-	// 		  </div>
-	// 		  <div>
-	// 		      {this.state.chartSelectorState === "Historical" && 
-	// 			  <CanvasJSChart options = {chart2Options}/>}
-	// 		  </div>
-	// 		  <div>
-	// 		      {this.state.chartSelectorState === "Contemporary" && 
-	// 			  <CanvasJSChart options = {chart3Options}/>}
-	// 		  </div>
-	//         </div>
-	//     ) : null;
       var onSurveyCompletion = this.state.isCompleted ? (
           <div>
 			  <h1>You've now completed the first portion of the LASR</h1>
@@ -422,7 +390,6 @@ class Scored extends Component {
         <div>
           {surveyRender}
           {onSurveyCompletion}
-          {/* <pre>{displayResults}</pre> */}
         </div>
       </div>
     );

@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import StartPage from './StartPage';
 import Scored from './Scored';
 import Unscored from './Unscored';
+import Results from './Results';
 
 class Main extends Component {
 	state = {
         step: 1,
-        idString: 'TRIAL',
+        idString: '',
         section_scores: []
     }
 

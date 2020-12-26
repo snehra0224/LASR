@@ -5,6 +5,12 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class Results extends Component{
+    constructor(props){
+        super(props)
+        this.state = {
+          chartSelectorState: 'Combined'
+        }
+    }
     render(){
         const selectorOptions = [
             {
@@ -42,12 +48,12 @@ class Results extends Component{
                 name: "Total score",
                 toolTipContent: "<b>{label}</b> <br> <span style= color: #4F81BC>{name}</span>: {y}",
                 dataPoints:[
-                    {y:(this.state.section_scores[0] + this.state.section_scores[1]), label: "Section 1", color: "#f3a4a8"},
-                    {y:(this.state.section_scores[2] + this.state.section_scores[3]), label: "Section 2"},
-                    {y:(this.state.section_scores[4] + this.state.section_scores[5]), label: "Section 3"},
-                    {y:(this.state.section_scores[6] + this.state.section_scores[7]), label: "Section 4"},
-                    {y:(this.state.section_scores[8] + this.state.section_scores[9]), label: "Section 5"},
-                    {y:this.state.section_scores[10], label: "Total"}
+                    {y:(this.props.section_scores[0] + this.props.section_scores[1]), label: "Section 1", color: "#f3a4a8"},
+                    {y:(this.props.section_scores[2] + this.props.section_scores[3]), label: "Section 2"},
+                    {y:(this.props.section_scores[4] + this.props.section_scores[5]), label: "Section 3"},
+                    {y:(this.props.section_scores[6] + this.props.section_scores[7]), label: "Section 4"},
+                    {y:(this.props.section_scores[8] + this.props.section_scores[9]), label: "Section 5"},
+                    {y:this.props.section_scores[10], label: "Total"}
                 ]
             },
             {
@@ -77,12 +83,12 @@ class Results extends Component{
                 name: "Historical score",
                 toolTipContent: "<b>{label}</b> <br> <span style= color: #4F81BC>{name}</span>: {y}",
                 dataPoints:[
-                    {y:this.state.section_scores[0], label: "Section 1", color: "#f3a4a8"},
-                {y:this.state.section_scores[2], label: "Section 2"},
-                {y:this.state.section_scores[4], label: "Section 3"},
-                {y:this.state.section_scores[6], label: "Section 4"},
-                {y:this.state.section_scores[8], label: "Section 5"},
-                {y:this.state.section_scores[10], label: "Total"}
+                    {y:this.props.section_scores[0], label: "Section 1", color: "#f3a4a8"},
+                {y:this.props.section_scores[2], label: "Section 2"},
+                {y:this.props.section_scores[4], label: "Section 3"},
+                {y:this.props.section_scores[6], label: "Section 4"},
+                {y:this.props.section_scores[8], label: "Section 5"},
+                {y:this.props.section_scores[10], label: "Total"}
                 ]
             },
             {
@@ -112,12 +118,12 @@ class Results extends Component{
                 name: "Total score",
                 toolTipContent: "<b>{label}</b> <br> <span style= color: #4F81BC>{name}</span>: {y}",
                 dataPoints:[
-                    {y: this.state.section_scores[1], label: "Section 1", color: "#f3a4a8"},
-                {y: this.state.section_scores[3], label: "Section 2"},
-                {y: this.state.section_scores[5], label: "Section 3"},
-                {y: this.state.section_scores[7], label: "Section 4"},
-                {y: this.state.section_scores[9], label: "Section 5"},
-                {y: this.state.section_scores[10], label: "Total"}
+                    {y: this.props.section_scores[1], label: "Section 1", color: "#f3a4a8"},
+                {y: this.props.section_scores[3], label: "Section 2"},
+                {y: this.props.section_scores[5], label: "Section 3"},
+                {y: this.props.section_scores[7], label: "Section 4"},
+                {y: this.props.section_scores[9], label: "Section 5"},
+                {y: this.props.section_scores[10], label: "Total"}
                 ]
             },
             {
@@ -134,6 +140,31 @@ class Results extends Component{
                 ]
             }]
         };
+        return (
+            <div>
+            <div>
+                <SwitchSelector
+                      onChange={onChange}
+                      options={selectorOptions}
+                      initialSelectedIndex={initialSelectedIndex}
+                      backgroundColor={"#808080"}
+                      fontColor={"#000000"}
+                  />
+            </div>
+              <div>
+                {this.state.chartSelectorState === "Combined" && 
+                <CanvasJSChart options = {chart1Options}/>}
+            </div>
+            <div>
+                {this.state.chartSelectorState === "Historical" && 
+                <CanvasJSChart options = {chart2Options}/>}
+            </div>
+            <div>
+                {this.state.chartSelectorState === "Contemporary" && 
+                <CanvasJSChart options = {chart3Options}/>}
+            </div>
+          </div>
+        );
     }
 }
 export default Results;

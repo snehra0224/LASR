@@ -24,20 +24,20 @@ app.get("/api/getIDStrings", (req,res) => {
 });
 
 app.post("/api/insertScores", (req,res) => {
-	const section1_score_h = req.body.section1_score_h;
-	const section1_score_c = req.body.section1_score_c;
-	const section2_score_h = req.body.section2_score_h;
-	const section2_score_c = req.body.section2_score_c;
-	const section3_score_h = req.body.section3_score_h;
-	const section3_score_c = req.body.section3_score_c;
-	const section4_score_h = req.body.section4_score_h;
-	const section4_score_c = req.body.section4_score_c;
-	const section5_score_h = req.body.section5_score_h;
-	const section5_score_c = req.body.section5_score_c;
-	const total_score = req.body.total_score;
+	const section1_h = req.body.section1_h;
+	const section1_c = req.body.section1_c;
+	const section2_h = req.body.section2_h;
+	const section2_c = req.body.section2_c;
+	const section3_h = req.body.section3_h;
+	const section3_c = req.body.section3_c;
+	const section4_h = req.body.section4_h;
+	const section4_c = req.body.section4_c;
+	const section5_h = req.body.section5_h;
+	const section5_c = req.body.section5_c;
+	const total = req.body.total;
 	const idString = req.body.idString;
-	const sqlInsert = "INSERT INTO user_scores (idString, section1_score_h, section1_score_c, section2_score_h, section2_score_c, section3_score_h, section3_score_c, section4_score_h, section4_score_c, section5_score_h, section5_score_c, total_score) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
-	db.query(sqlInsert, [idString, section1_score_h, section1_score_c, section2_score_h, section2_score_c, section3_score_h, section3_score_c, section4_score_h, section4_score_c, section5_score_h, section5_score_c, total_score], (err, result) => {
+	const sqlInsert = "INSERT INTO user_scores (idString, section1_h, section1_c, section2_h, section2_c, section3_h, section3_c, section4_h, section4_c, section5_h, section5_c, total_score) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
+	db.query(sqlInsert, [idString, section1_h, section1_c, section2_h, section2_c, section3_h, section3_c, section4_h, section4_c, section5_h, section5_c, total], (err, result) => {
 		console.log(err);
 	});
 });
