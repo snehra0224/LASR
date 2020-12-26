@@ -6,7 +6,7 @@ import Unscored from './Unscored';
 class Main extends Component {
 	state = {
         step: 1,
-        idString: '',
+        idString: 'TRIAL',
         section_scores: []
     }
 

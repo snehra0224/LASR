@@ -179,7 +179,7 @@ app.post("/api/insertBehaviors", (req,res) => {
 	const data = req.body.json;
 	var toPass = [idString];
 	for(var i in data){
-		temp = data[i]['Select one or more'];
+		temp = data[i]['Select one or more.'];
 		text = '';
 		for(var j in temp){
 			if(j != 0){
@@ -194,6 +194,28 @@ app.post("/api/insertBehaviors", (req,res) => {
 		console.log(err);
 	});
 	console.log("success2");
+});
+
+app.post("/api/insertPsych", (req,res) => {
+	const idString = req.body.idString;
+	const data = req.body.json;
+	var toPass = [idString];
+	for(var i in data){
+		temp = data[i]['Mark all that apply.'];
+		text = '';
+		for(var j in temp){
+			if(j != 0){
+				text += ', ';
+			}
+			text += temp[j];
+		}
+		toPass.push(text);
+	}
+	const sqlInsert = "INSERT INTO user_psych (idString, anxiety, depression, conduct_disorder, IED, ICD, PTSD, MJD, BD, PD, substance, ADHD, autism, insomnia) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	db.query(sqlInsert, toPass, (err, result) => {
+		console.log(err);
+	});
+	console.log("success3");
 });
 
 app.listen(3001, () => {

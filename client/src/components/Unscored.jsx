@@ -37,6 +37,10 @@ class Unscored extends Component{
         .then(() => {
           alert("Insert successful");
         });
+        Axios.post(`http://localhost:3001/api/insertPsych`, {idString: this.props.idString, json: results['Psych']})
+        .then(() => {
+          alert("Insert successful");
+        });
     }
     onUpdateQuestionCssClasses = (survey, options) => {
       var classes = options.cssClasses
@@ -230,7 +234,7 @@ class Unscored extends Component{
                   "titleLocation": "hidden",
                   "columns": [
                    {
-                    "name": "Select one or more",
+                    "name": "Select one or more.",
                     "isRequired": true
                    }
                   ],
