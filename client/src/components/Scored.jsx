@@ -3,16 +3,16 @@ import * as Survey from "survey-react";
 import {Button} from 'semantic-ui-react';
 import Axios from 'axios';
 import './Scored.css';
-import qs1_dict from './qs1';
-import qs2_dict from './qs2';
-import qs3_dict from './qs3';
-import qs4_dict from './qs4';
-import qs5_dict from './qs5';
-import qs6_dict from './qs6';
-import qs7_dict from './qs7';
-import qs8_dict from './qs8';
-import qs9_dict from './qs9';
-import qs10_dict from './qs10';
+import qs1_dict from './Questions/qs1';
+import qs2_dict from './Questions/qs2';
+import qs3_dict from './Questions/qs3';
+import qs4_dict from './Questions/qs4';
+import qs5_dict from './Questions/qs5';
+import qs6_dict from './Questions/qs6';
+import qs7_dict from './Questions/qs7';
+import qs8_dict from './Questions/qs8';
+import qs9_dict from './Questions/qs9';
+import qs10_dict from './Questions/qs10';
 
 class Scored extends Component {
   constructor(props){
