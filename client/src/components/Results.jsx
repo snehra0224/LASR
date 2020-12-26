@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import SwitchSelector from "react-switch-selector";
 import CanvasJSReact from './canvasjs.react';
-var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class Results extends Component{
@@ -48,11 +47,11 @@ class Results extends Component{
                 name: "Total score",
                 toolTipContent: "<b>{label}</b> <br> <span style= color: #4F81BC>{name}</span>: {y}",
                 dataPoints:[
-                    {y:(this.props.section_scores[0] + this.props.section_scores[1]), label: "Section 1", color: "#f3a4a8"},
-                    {y:(this.props.section_scores[2] + this.props.section_scores[3]), label: "Section 2"},
-                    {y:(this.props.section_scores[4] + this.props.section_scores[5]), label: "Section 3"},
-                    {y:(this.props.section_scores[6] + this.props.section_scores[7]), label: "Section 4"},
-                    {y:(this.props.section_scores[8] + this.props.section_scores[9]), label: "Section 5"},
+                    {y:(this.props.section_scores[0] + this.props.section_scores[1]), label: "Section 1", color: "#02B954"},
+                    {y:(this.props.section_scores[2] + this.props.section_scores[3]), label: "Section 2", color: "#6C3602"},
+                    {y:(this.props.section_scores[4] + this.props.section_scores[5]), label: "Section 3", color: "#3C72CF"},
+                    {y:(this.props.section_scores[6] + this.props.section_scores[7]), label: "Section 4", color: "#FFCF18"},
+                    {y:(this.props.section_scores[8] + this.props.section_scores[9]), label: "Section 5", color: "#7C36AD"},
                     {y:this.props.section_scores[10], label: "Total"}
                 ]
             },
@@ -83,11 +82,11 @@ class Results extends Component{
                 name: "Historical score",
                 toolTipContent: "<b>{label}</b> <br> <span style= color: #4F81BC>{name}</span>: {y}",
                 dataPoints:[
-                    {y:this.props.section_scores[0], label: "Section 1", color: "#f3a4a8"},
-                {y:this.props.section_scores[2], label: "Section 2"},
-                {y:this.props.section_scores[4], label: "Section 3"},
-                {y:this.props.section_scores[6], label: "Section 4"},
-                {y:this.props.section_scores[8], label: "Section 5"},
+                {y:this.props.section_scores[0], label: "Section 1", color: "#02B954"},
+                {y:this.props.section_scores[2], label: "Section 2", color: "#6C3602"},
+                {y:this.props.section_scores[4], label: "Section 3", color: "#3C72CF"},
+                {y:this.props.section_scores[6], label: "Section 4", color: "#FFCF18"},
+                {y:this.props.section_scores[8], label: "Section 5", color: "#7C36AD"},
                 {y:this.props.section_scores[10], label: "Total"}
                 ]
             },
@@ -118,11 +117,11 @@ class Results extends Component{
                 name: "Total score",
                 toolTipContent: "<b>{label}</b> <br> <span style= color: #4F81BC>{name}</span>: {y}",
                 dataPoints:[
-                    {y: this.props.section_scores[1], label: "Section 1", color: "#f3a4a8"},
-                {y: this.props.section_scores[3], label: "Section 2"},
-                {y: this.props.section_scores[5], label: "Section 3"},
-                {y: this.props.section_scores[7], label: "Section 4"},
-                {y: this.props.section_scores[9], label: "Section 5"},
+                {y: this.props.section_scores[1], label: "Section 1", color: "#02B954"},
+                {y: this.props.section_scores[3], label: "Section 2", color: "#6C3602"},
+                {y: this.props.section_scores[5], label: "Section 3", color: "#3C72CF"},
+                {y: this.props.section_scores[7], label: "Section 4", color: "#FFCF18"},
+                {y: this.props.section_scores[9], label: "Section 5", color: "#7C36AD"},
                 {y: this.props.section_scores[10], label: "Total"}
                 ]
             },

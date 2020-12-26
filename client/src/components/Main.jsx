@@ -43,6 +43,12 @@ class Main extends Component {
                         section_scores = {this.state.section_scores}
                         idString = {this.state.idString}
                         />
+            default:
+                return(
+                    <div>
+                        Undefined
+                    </div>
+                );
         }
     }
 }
