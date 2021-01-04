@@ -4,8 +4,8 @@ const mysql = require('mysql')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const Str = require('@supercharge/strings')
-var Sequelize = require('sequelize')
-var connection = new Sequelize('lasr_db', 'root', 'Taysachsdisease1!')
+// var Sequelize = require('sequelize')
+//var connection = new Sequelize('lasr_db', 'root', 'Taysachsdisease1!')
 
 const db = mysql.createPool({
 	host: "localhost",
