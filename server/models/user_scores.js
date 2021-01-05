@@ -44,5 +44,5 @@ function user_scores(sequelize) {
         }
     };
 
-    return sequelize.define('User', attributes);
+    return sequelize.define('user_scores', attributes);
 }
