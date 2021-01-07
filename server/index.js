@@ -11,6 +11,22 @@ var connection = new Sequelize('lasr_db', 'root', 'Taysachsdisease1!', { dialect
 async function insertScores(params){
 	await db.user_scores.create(params);
 }
+
+async function insertSystemEngagement(params){
+	await db.user_system_engagement.create(params);
+}
+
+async function insertBehaviors(params){
+	await db.user_behaviors.create(params);
+}
+
+async function insertPsych(params){
+	await db.user_psych.create(params);
+}
+
+async function insertPhys(params){
+	await db.user_phys.create(params);
+}
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -177,11 +193,31 @@ app.post("/api/insertSystemEngagement", (req,res) => {
 			a_long_term = text;
 		}
 	}
-	const sqlInsert = "INSERT INTO user_system_engagement (idString, foodAssist, houseAssist, childWelfare, foster, foster_num, j_div, j_div_num, j_p, j_p_num, j_short_term, j_short_term_num, j_long_term, j_long_term_num, a_div, a_div_num, a_p, a_p_num, a_short_term, a_short_term_num, a_long_term, a_long_term_num) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	db.query(sqlInsert, [idString, foodAssist, houseAssist, childWelfare, foster, foster_num, j_div, j_div_num, j_p, j_p_num, j_short_term, j_short_term_num, j_long_term, j_long_term_num, a_div, a_div_num, a_p, a_p_num, a_short_term, a_short_term_num, a_long_term, a_long_term_num], (err, result) => {
-		console.log(err);
-	});
-	console.log("success1");
+
+	var params = {
+		idString: idString,
+		foodAssist: foodAssist,
+		houseAssist: houseAssist,
+		childWelfare: childWelfare,
+		foster: foster,
+		foster_num: foster_num,
+		j_div: j_div,
+		j_p: j_p,
+		j_p_num: j_p_num,
+		j_short_term: j_short_term,
+		j_short_term_num: j_short_term_num,
+		j_long_term: j_long_term,
+		j_long_term_num: j_long_term_num,
+		a_div: a_div,
+		a_div_num: a_div_num,
+		a_p: a_p,
+		a_p_num: a_p_num,
+		a_short_term: a_short_term,
+		a_short_term_num: a_short_term_num,
+		a_long_term: a_long_term,
+		a_long_term_num: a_long_term_num
+	}
+	insertSystemEngagement(params);
 });
 
 app.post("/api/insertBehaviors", (req,res) => {
@@ -199,11 +235,33 @@ app.post("/api/insertBehaviors", (req,res) => {
 		}
 		toPass.push(text);
 	}
-	const sqlInsert = "INSERT INTO user_behaviors (idString, aggression, violence, cruelty, bullying, intimidation, destruction_of_property, lying, theft, assault, battery, drug_use, possession_drugs_sell, breaking_entering, forgery, counterfeit_bills, extortion, purse_snatching, physical_fights, assault_deadly_weapon, truancy_breaking_curfew, running_from_home, cruelty_animals, forcing_sexual_activity) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	db.query(sqlInsert, toPass, (err, result) => {
-		console.log(err);
-	});
-	console.log("success2");
+	var params = {
+		idString: toPass[0],
+		aggression: toPass[1],
+		violence: toPass[2],
+		cruelty: toPass[3],
+		bullying: toPass[4],
+		intimidation: toPass[5],
+		destruction_of_property: toPass[6],
+		lying: toPass[7],
+		theft: toPass[8],
+		assault: toPass[9],
+		battery: toPass[10],
+		drug_use: toPass[11],
+		possession_drugs_sell: toPass[12],
+		breaking_entering: toPass[13],
+		forgery: toPass[14],
+		counterfeit_bills: toPass[15],
+		extortion: toPass[16],
+		purse_snatching: toPass[17],
+		physical_fights: toPass[18],
+		assault_deadly_weapon: toPass[19],
+		truancy_breaking_curfew: toPass[20],
+		running_from_home: toPass[21],
+		cruelty_animals: toPass[22],
+		forcing_sexual_activity: toPass[23]
+	}
+	insertBehaviors(params);
 });
 
 app.post("/api/insertPsych", (req,res) => {
@@ -221,11 +279,23 @@ app.post("/api/insertPsych", (req,res) => {
 		}
 		toPass.push(text);
 	}
-	const sqlInsert = "INSERT INTO user_psych (idString, anxiety, depression, conduct_disorder, IED, ICD, PTSD, MJD, BD, PD, substance, ADHD, autism, insomnia) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	db.query(sqlInsert, toPass, (err, result) => {
-		console.log(err);
-	});
-	console.log("success3");
+	var params = {
+		idString: toPass[0],
+		anxiety: toPass[1],
+		depression: toPass[2],
+		conduct_disorder: toPass[3],
+		IED: toPass[4],
+		ICD: toPass[5],
+		PTSD: toPass[6],
+		MJD: toPass[7],
+		BD: toPass[8],
+		PD: toPass[9],
+		substance: toPass[10],
+		ADHD: toPass[11],
+		autism: toPass[12],
+		insomnia: toPass[13]
+	}
+	insertPsych(params);
 });
 
 app.post("/api/insertPhys", (req,res) => {
@@ -243,12 +313,21 @@ app.post("/api/insertPhys", (req,res) => {
 		}
 		toPass.push(text);
 	}
-	const sqlInsert = "INSERT INTO user_phys (idString, high_bp, insulin_res, diabetes, obesity, stroke, cardio, heart_attack, preeclampsia, premature, low_birth_weight) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-	db.query(sqlInsert, toPass, (err, result) => {
-		console.log(err);
-	});
-	console.log("success4");
+	var params = {
+		idString: toPass[0],
+		high_bp: toPass[1],
+		insulin_res: toPass[2],
+		diabetes: toPass[3],
+		obesity: toPass[4],
+		stroke: toPass[5],
+		cardio: toPass[6],
+		heart_attack: toPass[7],
+		preeclampsia: toPass[8],
+		premature: toPass[9],
+		low_birth_weight: toPass[10]
+	}
+	insertPhys(params);
 });
-app.listen(3001, () => {
-	console.log("running on port 3001");
-});
+
+const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 4000;
+app.listen(port, () => console.log('Server listening on port ' + port));
