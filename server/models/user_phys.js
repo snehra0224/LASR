@@ -41,5 +41,5 @@ function user_phys(sequelize) {
         }
     };
 
-    return sequelize.define('user_phys', attributes);
+    return sequelize.define('user_phys', attributes,{freezeTableName: true});
 }

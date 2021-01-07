@@ -79,5 +79,5 @@ function user_behaviors(sequelize) {
         },
     };
 
-    return sequelize.define('user_behaviors', attributes);
+    return sequelize.define('user_behaviors', attributes,{freezeTableName: true});
 }

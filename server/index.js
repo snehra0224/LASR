@@ -4,16 +4,13 @@ const mysql = require('mysql')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const Str = require('@supercharge/strings')
-// var Sequelize = require('sequelize')
-//var connection = new Sequelize('lasr_db', 'root', 'Taysachsdisease1!')
+const db = require('./_helpers/db')
+var Sequelize = require('sequelize')
+var connection = new Sequelize('lasr_db', 'root', 'Taysachsdisease1!', { dialect: 'mysql' }) 
 
-const db = mysql.createPool({
-	host: "localhost",
-	user: "root",
-	password: "Taysachsdisease1!",
-	database: "lasr_db",
-});
-
+async function insertScores(params){
+	await db.user_scores.create(params);
+}
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -38,10 +35,21 @@ app.post("/api/insertScores", (req,res) => {
 	const section5_c = req.body.section5_c;
 	const total = req.body.total;
 	const idString = req.body.idString;
-	const sqlInsert = "INSERT INTO user_scores (idString, section1_h, section1_c, section2_h, section2_c, section3_h, section3_c, section4_h, section4_c, section5_h, section5_c, total_score) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
-	db.query(sqlInsert, [idString, section1_h, section1_c, section2_h, section2_c, section3_h, section3_c, section4_h, section4_c, section5_h, section5_c, total], (err, result) => {
-		console.log(err);
-	});
+	var params = {
+		idString: idString,
+		section1_h: section1_h,
+		section1_c: section1_c,
+		section2_h: section2_h,
+		section2_c: section2_c,
+		section3_h: section3_h,
+		section3_c: section3_c,
+		section4_h: section4_h,
+		section4_c: section4_c,
+		section5_h: section5_h,
+		section5_c: section5_c,
+		total: total
+	}
+	insertScores(params);
 });
 
 app.post("/api/insertSystemEngagement", (req,res) => {

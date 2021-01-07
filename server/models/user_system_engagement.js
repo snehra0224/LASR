@@ -73,5 +73,5 @@ function user_system_engagement(sequelize) {
         }
     };
     
-    return sequelize.define('user_system_engagement', attributes);
+    return sequelize.define('user_system_engagement', attributes, {freezeTableName: true});
 }

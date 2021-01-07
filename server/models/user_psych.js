@@ -50,5 +50,5 @@ function user_psych(sequelize) {
         },
     };
 
-    return sequelize.define('user_psych', attributes);
+    return sequelize.define('user_psych', attributes,{freezeTableName: true});
 }

@@ -44,5 +44,5 @@ function user_scores(sequelize) {
         }
     };
 
-    return sequelize.define('user_scores', attributes);
+    return sequelize.define('user_scores', attributes,{freezeTableName: true});
 }
