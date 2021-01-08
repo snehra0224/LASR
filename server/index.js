@@ -37,10 +37,6 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.get("/api/getIDStrings", (req,res) => {
-	// const sqlGet = "SELECT idString FROM lasr_db.user_results;";
-	// db.query(sqlGet, (err, result) => {
-	// 	res.send(result);
-	// });
 	getIDStrings().then(function(result){
 		console.log(result);
 		res.send(result);
