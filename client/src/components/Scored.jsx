@@ -83,7 +83,7 @@ class Scored extends Component {
 	scores.push(sum);
 	this.props.setScores(scores);
 	console.log(this.props.idString);
-	Axios.post(`http://localhost:3001/api/insertScores`, {idString: this.props.idString,
+	Axios.post(`http://localhost:4000/api/insertScores`, {idString: this.props.idString,
 													section1_h: scores[0], 
 													section1_c: scores[1], 
 													section2_h: scores[2],

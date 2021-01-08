@@ -20,7 +20,7 @@ class StartPage extends Component{
 	genID = (e) => {
 		var temp = [];
 		var idString = Str.random(5);
-		Axios.get(`http://localhost:3001/api/getIDStrings`)
+		Axios.get(`http://localhost:4000/api/getIDStrings`)
 		.then((response) => {
 			temp = response.data;
 		});

@@ -10,6 +10,7 @@ var connection = new Sequelize('lasr_db', 'root', 'Taysachsdisease1!', { dialect
 
 async function insertScores(params){
 	await db.user_scores.create(params);
+	console.log("success1");
 }
 
 async function insertSystemEngagement(params){
@@ -27,18 +28,27 @@ async function insertPsych(params){
 async function insertPhys(params){
 	await db.user_phys.create(params);
 }
+
+async function getIDStrings(){
+	return db.user_scores.findAll({attributes: ['idString']});
+}
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.get("/api/getIDStrings", (req,res) => {
-	const sqlGet = "SELECT idString FROM lasr_db.user_results;";
-	db.query(sqlGet, (err, result) => {
+	// const sqlGet = "SELECT idString FROM lasr_db.user_results;";
+	// db.query(sqlGet, (err, result) => {
+	// 	res.send(result);
+	// });
+	getIDStrings().then(function(result){
+		console.log(result);
 		res.send(result);
 	});
 });
 
 app.post("/api/insertScores", (req,res) => {
+	console.log("entered");
 	const section1_h = req.body.section1_h;
 	const section1_c = req.body.section1_c;
 	const section2_h = req.body.section2_h;
